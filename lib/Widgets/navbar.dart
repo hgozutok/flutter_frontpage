@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_frontpage/Views/about.dart';
+import 'package:flutter_frontpage/Views/home.dart';
 
-AppBar NavBar() {
+AppBar NavBar(BuildContext context) {
   return AppBar(
     title: Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -13,7 +15,14 @@ AppBar NavBar() {
     actions: <Widget>[
       TextButton(
         child: Text("Home", style: TextStyle(color: Colors.white)),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    MyHomePage(title: 'Flutter Landing Home Page')),
+          );
+        },
       ),
       TextButton(
         child: Text("Shop", style: TextStyle(color: Colors.white)),
@@ -21,7 +30,12 @@ AppBar NavBar() {
       ),
       TextButton(
         child: const Text("About us", style: TextStyle(color: Colors.white)),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AboutPage()),
+          );
+        },
       ),
       TextButton(
         child: Text("Contact us", style: TextStyle(color: Colors.white)),
