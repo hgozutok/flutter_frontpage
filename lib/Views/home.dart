@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_frontpage/Widgets/navbar.dart';
+import 'package:flutter_frontpage/db/app_db.dart';
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -16,6 +18,18 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+    });
+  }
+
+  String? name;
+  @override
+  initState() {
+    super.initState();
+    setState(() {
+      AppDb().getCustomerName(1).then((value) {
+        name = value;
+        print("name" + name!);
+      });
     });
   }
 
@@ -82,6 +96,26 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: MediaQuery.of(context).size.height * 0.1,
                       ),
                       Text("We help you to find the best products for you",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 5, 0, 0),
+                              fontSize: 30)),
+                      TextButton(
+                        child: Text("Shop Now",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 5, 0, 0),
+                                fontSize: 30)),
+                        onPressed: () async {
+                          var res =
+                              await AppDb().getCustomerName(2).then((value) {
+                            setState(() {
+                              name = value.toString();
+                              print("name" + name!);
+                            });
+                          });
+                          // print(res.toString());
+                        },
+                      ),
+                      Text(name ?? "null",
                           style: TextStyle(
                               color: Color.fromARGB(255, 5, 0, 0),
                               fontSize: 30)),
