@@ -9,7 +9,8 @@ class AppDb {
       username: dotenv.get('POSTGRES_USER'),
       password: dotenv.get('POSTGRES_PASSWORD'));
   PostgreSQLResult? customerResult;
-
+  
+//run only ssr
   Future<PostgreSQLConnection?> getConnection() async {
     if (connection == null || connection.isClosed) {
       connection = PostgreSQLConnection(dotenv.get('POSTGRES_URL'),
